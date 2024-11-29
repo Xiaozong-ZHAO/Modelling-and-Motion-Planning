@@ -2,12 +2,13 @@ import rclpy
 from rclpy.node import Node
 # TODO: Import the message type that holds data describing robot joint angle states
 # this tutorial may have hints: https://docs.ros.org/en/rolling/Tutorials/Intermediate/URDF/Using-URDF-with-Robot-State-Publisher.html#publish-the-state
-
+from sensor_msgs.msg import JointState
 # TODO: Import the class that publishes coordinate frame transform information
 # this tutorial may have hints: https://docs.ros.org/en/rolling/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Listener-Py.html
-
+from tf2_ros import TransformBroadcaster
 # TODO: Import the message type that expresses a transform from one coordinate frame to another
 # this same tutorial from earlier has hints: https://docs.ros.org/en/rolling/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Listener-Py.html
+from geometry_msgs.msg import TransformStamped
 
 import numpy as np
 from numpy.typing import NDArray
@@ -30,17 +31,31 @@ BASE_FRAME = "base"
 FRAMES = ["fr3_link0", "fr3_link1", "fr3_link2", "fr3_link3", "fr3_link4", "fr3_link5", "fr3_link6", "fr3_link7", "fr3_link8"]
 
 def get_transform_n_to_n_minus_one(n: int, theta: float) -> NDArray:
-    # this function calculates the transform to go from n to n-1 
-    # using modified denavit hartenberg parameters
+    """
+    Calculate the transform from frame n to frame n-1 using modified DH parameters.
 
-    transform_matrix = np.zeros((4,4))
+    Args:
+        n (int): The current joint index (1-based, as per DH conventions).
+        theta (float): The joint angle for the current joint.
 
-    n_minus_one = n - 1
+    Returns:
+        NDArray: A 4x4 homogeneous transformation matrix.
+    """
+    # Extract the DH parameters for joint n
+    a = DH_PARAMS[n, 0]       # Link length
+    d = DH_PARAMS[n, 1]       # Link offset
+    alpha = DH_PARAMS[n, 2]   # Twist angle
+    theta += DH_PARAMS[n, 3]  # Joint angle (includes theta offset in modified DH parameters)
 
-    # TODO: implement this function
-    # note that it may be helpful to refer to documentation on modified denavit hartenberg parameters:
-    # https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters#Modified_DH_parameters
-    raise NotImplementedError
+    # Compute the transformation matrix using the modified DH convention
+    transform_matrix = np.array([
+        [np.cos(theta), -np.sin(theta) * np.cos(alpha),  np.sin(theta) * np.sin(alpha), a * np.cos(theta)],
+        [np.sin(theta),  np.cos(theta) * np.cos(alpha), -np.cos(theta) * np.sin(alpha), a * np.sin(theta)],
+        [0,              np.sin(alpha),                 np.cos(alpha),                d],
+        [0,              0,                             0,                            1]
+    ])
+
+    return transform_matrix
 
 
 
@@ -49,72 +64,97 @@ class ForwardKinematicCalculator(Node):
     def __init__(self):
         super().__init__('fk_calculator')
 
-        # TODO: create a subscriber to joint states, can you find which topic
-        # this publishes on by using ros2 topic list while running the example?
-        raise NotImplementedError
-        self.joint_sub  # prevent unused variable warning
+        # Create a subscriber to joint states
+        # Use ros2 topic list to find the correct topic (e.g., /joint_states)
+        self.joint_sub = self.create_subscription(
+            JointState,  # Message type
+            '/joint_states',  # Topic name
+            self.publish_transforms,  # Callback function
+            10  # QoS depth
+        )
 
         # Initialize the transform broadcaster
         self.tf_broadcaster = TransformBroadcaster(self)
 
-        # self.prefix = ""
+        # Set the prefix for the frame names
         self.prefix = "my_robot/"
 
     def publish_transforms(self, msg: JointState):
-
-
+        """
+        Publish transforms for all robot links using joint states.
+        """
         self.get_logger().debug(str(msg))
 
-        # note our frames list is longer than the number of joints, so some special handling is required
+        # Loop through all frames and compute transforms
         for i in range(len(FRAMES) - 1, -1, -1):
             frame_id = self.prefix + FRAMES[i]
             if i != 0:
                 parent_id = self.prefix + FRAMES[i - 1]
             else:
                 parent_id = self.prefix + BASE_FRAME
-            theta = None
+
+            # Determine the joint angle (theta) for the current link
             if i != len(FRAMES) - 1 and i != 0:
-                # joint msg has 7 entries, not base or static flange
-                # 'fr3_joint1', 'fr3_joint2', 'fr3_joint3', 'fr3_joint4', 'fr3_joint5', 'fr3_joint6', 'fr3_joint7'
+                # Joint angles from the joint state message
                 theta = msg.position[i - 1]
             elif i == len(FRAMES) - 1:
-                # flange joint with the static transform and theta of zero
+                # Flange joint with static transform
                 theta = 0
             else:
+                # Base frame with no rotation
                 theta = 0
 
+            # Create a TransformStamped message
             t = TransformStamped()
             t.header.stamp = self.get_clock().now().to_msg()
             t.header.frame_id = parent_id
             t.child_frame_id = frame_id
 
+            # Compute the transform matrix
             if i != 0:
                 transform = get_transform_n_to_n_minus_one(i, theta)
             else:
-                transform = np.eye(4)
+                transform = np.eye(4)  # Identity for the base frame
 
-            quat = rotmat2q(transform[:3, :3])
+            # Extract translation and rotation
+            translation = transform[:3, 3]
+            rotation_matrix = transform[:3, :3]
+            quat = rotmat2q(rotation_matrix)  # Convert rotation matrix to quaternion
 
-            # TODO: set the translation and rotation in the message we have created
-            # you can check the documentation for the message type for ros2
-            # to see what members it has
-            raise NotImplementedError
+            # Set the translation and rotation in the TransformStamped message
+            t.transform.translation.x = translation[0]
+            t.transform.translation.y = translation[1]
+            t.transform.translation.z = translation[2]
 
+            t.transform.rotation.x = quat[0]
+            t.transform.rotation.y = quat[1]
+            t.transform.rotation.z = quat[2]
+            t.transform.rotation.w = quat[3]
+
+            # Publish the transform
             self.tf_broadcaster.sendTransform(t)
+
     
 
 
 
 def main(args=None):
+    # Initialize the ROS 2 Python client library
     rclpy.init(args=args)
 
-    # TODO: initialize our class and start it spinning
-    # this example may be helpful: https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html#write-the-subscriber-node
+    # Create an instance of the ForwardKinematicCalculator class
+    fk_calculator = ForwardKinematicCalculator()
 
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
+    # Spin the node to process callbacks
+    try:
+        rclpy.spin(fk_calculator)  # This keeps the node active, listening for messages
+    except KeyboardInterrupt:
+        fk_calculator.get_logger().info("Keyboard interrupt detected. Shutting down.")
+
+    # Destroy the node explicitly (optional, ensures clean shutdown)
     fk_calculator.destroy_node()
+
+    # Shutdown the ROS 2 Python client library
     rclpy.shutdown()
 
 
