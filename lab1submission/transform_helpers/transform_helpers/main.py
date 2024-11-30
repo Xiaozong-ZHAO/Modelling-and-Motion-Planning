@@ -51,10 +51,10 @@ def get_transform_n_to_n_plus_one(n: int, theta: float) -> NDArray:
     alpha = DH_PARAMS[n, 2]   # Twist angle
     theta += DH_PARAMS[n, 3]  # Joint angle (includes theta offset in modified DH parameters)
 
-    a_prev = DH_PARAMS[n - 1, 0]  # Link length
-    d_prev = DH_PARAMS[n - 1, 1]  # Link offset
-    alpha_prev = DH_PARAMS[n - 1, 2]  # Twist angle
-    theta_prev = DH_PARAMS[n - 1, 3]  # Joint angle (includes theta offset in modified DH parameters)
+    a_prev = DH_PARAMS[n, 0]  # Link length
+    d_prev = DH_PARAMS[n, 1]  # Link offset
+    alpha_prev = DH_PARAMS[n, 2]  # Twist angle
+    theta_prev = DH_PARAMS[n, 3]  # Joint angle (includes theta offset in modified DH parameters)
     # Compute the transformation matrix using the modified DH convention
     transform_matrix = np.array([
         [np.cos(theta), -np.sin(theta), 0, a_prev],
@@ -132,7 +132,7 @@ class ForwardKinematicCalculator(Node):
                 transform = np.eye(4)
             else:
                 # Compute the Modified DH transform matrix
-                transform = get_transform_n_to_n_plus_one(i, theta)
+                transform = get_transform_n_to_n_plus_one(i-1, theta)
 
             # Extract translation and rotation
             translation = transform[:3, 3]
