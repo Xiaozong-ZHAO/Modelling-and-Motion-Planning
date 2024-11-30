@@ -1,0 +1,169 @@
+[0.029s] Invoking command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake /home/relogic/ros2_ws/src/COMP0246_Labs/franka_description -DCMAKE_INSTALL_PREFIX=/home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description
+[0.409s] -- The C compiler identification is GNU 11.4.0
+[0.897s] -- The CXX compiler identification is GNU 11.4.0
+[1.157s] -- Detecting C compiler ABI info
+[1.299s] -- Detecting C compiler ABI info - done
+[1.307s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.308s] -- Detecting C compile features
+[1.309s] -- Detecting C compile features - done
+[1.313s] -- Detecting CXX compiler ABI info
+[1.446s] -- Detecting CXX compiler ABI info - done
+[1.454s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.454s] -- Detecting CXX compile features
+[1.455s] -- Detecting CXX compile features - done
+[1.467s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.622s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.734s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.276s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.284s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.286s] -- Added test 'lint_cmake' to check CMake code style
+[2.288s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.293s] -- Added test 'xmllint' to check XML markup files
+[2.296s] -- Configuring done
+[2.301s] -- Generating done
+[2.305s] -- Build files have been written to: /home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description
+[2.311s] Invoked command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake /home/relogic/ros2_ws/src/COMP0246_Labs/franka_description -DCMAKE_INSTALL_PREFIX=/home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description
+[2.315s] Invoking command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake --build /home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description -- -j12 -l12
+[2.349s] Invoked command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake --build /home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description -- -j12 -l12
+[2.358s] Invoking command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake --install /home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description
+[2.363s] -- Install configuration: ""
+[2.364s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//launch
+[2.364s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//launch/visualize_franka.launch.py
+[2.365s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots
+[2.365s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer
+[2.365s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer/joint_limits.yaml
+[2.366s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer/dynamics.yaml
+[2.366s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer/fer.urdf.xacro
+[2.367s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer/kinematics.yaml
+[2.367s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fer/inertials.yaml
+[2.367s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3
+[2.368s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3/joint_limits.yaml
+[2.369s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3/dynamics.yaml
+[2.369s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3/fp3.urdf.xacro
+[2.370s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3/kinematics.yaml
+[2.370s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fp3/inertials.yaml
+[2.371s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3
+[2.371s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3/joint_limits.yaml
+[2.372s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3/dynamics.yaml
+[2.372s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3/fr3.urdf.xacro
+[2.372s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3/kinematics.yaml
+[2.373s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/fr3/inertials.yaml
+[2.373s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/common
+[2.373s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/common/franka_robot.xacro
+[2.374s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/common/franka_arm.ros2_control.xacro
+[2.374s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/common/franka_arm.xacro
+[2.374s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//robots/common/utils.xacro
+[2.375s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors
+[2.375s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/franka_hand
+[2.375s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/franka_hand/franka_hand.urdf.xacro
+[2.376s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/franka_hand/franka_hand_arguments.xacro
+[2.376s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/franka_hand/inertials.yaml
+[2.376s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/cobot_pump
+[2.376s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/cobot_pump/cobot_pump_arguments.xacro
+[2.377s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/cobot_pump/cobot_pump.urdf.xacro
+[2.377s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/cobot_pump/inertials.yaml
+[2.378s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/common
+[2.378s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/common/franka_hand.xacro
+[2.379s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/common/ee_with_one_link.xacro
+[2.379s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//end_effectors/common/utils.xacro
+[2.379s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes
+[2.380s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms
+[2.380s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer
+[2.381s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual
+[2.381s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/hand.dae
+[2.383s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link5.dae
+[2.388s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link0.dae
+[2.393s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link2.dae
+[2.397s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link7.dae
+[2.400s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/finger.dae
+[2.400s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link1.dae
+[2.404s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link4.dae
+[2.408s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link6.dae
+[2.413s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/visual/link3.dae
+[2.417s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision
+[2.417s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link7.stl
+[2.418s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link4.stl
+[2.418s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link1.stl
+[2.419s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link5.stl
+[2.419s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link3.stl
+[2.420s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link0.stl
+[2.421s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link2.stl
+[2.421s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/link6.stl
+[2.422s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fer/collision/hand.stl
+[2.422s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3
+[2.423s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual
+[2.423s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link5.dae
+[2.432s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link0.dae
+[2.453s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link2.dae
+[2.457s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link7.dae
+[2.469s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link1.dae
+[2.473s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link4.dae
+[2.482s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link6.dae
+[2.498s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/visual/link3.dae
+[2.506s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision
+[2.507s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link7.stl
+[2.507s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link4.stl
+[2.508s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link1.stl
+[2.509s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link5.stl
+[2.509s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link3.stl
+[2.509s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link0.stl
+[2.510s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link2.stl
+[2.510s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fp3/collision/link6.stl
+[2.511s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3
+[2.511s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual
+[2.511s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link5.dae
+[2.523s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link0.dae
+[2.545s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link2.dae
+[2.548s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link7.dae
+[2.564s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link1.dae
+[2.567s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link4.dae
+[2.576s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link6.dae
+[2.593s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/visual/link3.dae
+[2.600s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision
+[2.601s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link7.stl
+[2.601s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link4.stl
+[2.601s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link1.stl
+[2.602s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link5.stl
+[2.602s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link3.stl
+[2.602s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link0.stl
+[2.603s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link2.stl
+[2.603s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_arms/fr3/collision/link6.stl
+[2.604s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee
+[2.604s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black
+[2.604s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black/visual
+[2.604s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black/visual/hand.dae
+[2.607s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black/visual/finger.dae
+[2.608s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black/collision
+[2.608s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_black/collision/hand.stl
+[2.609s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white
+[2.609s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white/visual
+[2.610s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white/visual/hand.dae
+[2.612s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white/visual/finger.dae
+[2.613s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white/collision
+[2.613s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/franka_hand_white/collision/hand.stl
+[2.614s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/cobot_pump
+[2.614s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/cobot_pump/visual
+[2.615s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/cobot_pump/visual/cobot_pump.dae
+[2.646s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/cobot_pump/collision
+[2.646s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//meshes/robot_ee/cobot_pump/collision/cobot_pump.stl
+[2.662s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//rviz
+[2.662s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//rviz/visualize_franka.rviz
+[2.663s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//urdfs
+[2.663s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//urdfs/fr3_franka_hand.urdf
+[2.664s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description//urdfs/fr3.urdf
+[2.665s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/ament_index/resource_index/package_run_dependencies/franka_description
+[2.665s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/ament_index/resource_index/parent_prefix_path/franka_description
+[2.665s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/environment/ament_prefix_path.sh
+[2.666s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/environment/ament_prefix_path.dsv
+[2.666s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/environment/path.sh
+[2.666s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/environment/path.dsv
+[2.666s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/local_setup.bash
+[2.666s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/local_setup.sh
+[2.667s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/local_setup.zsh
+[2.667s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/local_setup.dsv
+[2.667s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/package.dsv
+[2.667s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/ament_index/resource_index/packages/franka_description
+[2.668s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/cmake/franka_descriptionConfig.cmake
+[2.668s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/cmake/franka_descriptionConfig-version.cmake
+[2.668s] -- Installing: /home/relogic/ros2_ws/src/COMP0246_Labs/install/franka_description/share/franka_description/package.xml
+[2.671s] Invoked command in '/home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/relogic/ros2_ws/install/transform_helpers:/home/relogic/ros2_ws/install/py_srvcli:/opt/ros/humble /usr/bin/cmake --install /home/relogic/ros2_ws/src/COMP0246_Labs/build/franka_description

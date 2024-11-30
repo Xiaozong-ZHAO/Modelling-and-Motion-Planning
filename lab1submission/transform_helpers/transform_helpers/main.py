@@ -41,7 +41,11 @@ def get_transform_n_to_n_plus_one(n: int, theta: float) -> NDArray:
     Returns:
         NDArray: A 4x4 homogeneous transformation matrix.
     """
+    # TODO: implement this function
+    # note that it may be helpful to refer to documentation on modified denavit hartenberg parameters:
+    # https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters#Modified_DH_parameters
     # Extract the DH parameters for joint n
+    
     a = DH_PARAMS[n, 0]       # Link length
     d = DH_PARAMS[n, 1]       # Link offset
     alpha = DH_PARAMS[n, 2]   # Twist angle
@@ -68,8 +72,8 @@ class ForwardKinematicCalculator(Node):
     def __init__(self):
         super().__init__('fk_calculator')
 
-        # Create a subscriber to joint states
-        # Use ros2 topic list to find the correct topic (e.g., /joint_states)
+        # TODO: create a subscriber to joint states, can you find which topic
+        # this publishes on by using ros2 topic list while running the example?
         self.joint_sub = self.create_subscription(
             JointState,  # Message type
             '/joint_states',  # Topic name
@@ -135,6 +139,10 @@ class ForwardKinematicCalculator(Node):
             rotation_matrix = transform[:3, :3]
             quat = rotmat2q(rotation_matrix)  # Convert rotation matrix to quaternion
 
+            # TODO: set the translation and rotation in the message we have created
+            # you can check the documentation for the message type for ros2
+            # to see what members it has
+
             # Set the translation and rotation in the TransformStamped message
             t.transform.translation.x = translation[0]
             t.transform.translation.y = translation[1]
@@ -153,7 +161,8 @@ class ForwardKinematicCalculator(Node):
 
 
 def main(args=None):
-    # Initialize the ROS 2 Python client library
+    # TODO: initialize our class and start it spinning
+    # this example may be helpful: https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html#write-the-subscriber-node
     rclpy.init(args=args)
 
     # Create an instance of the ForwardKinematicCalculator class
