@@ -18,6 +18,7 @@ def rotmat2q(T: NDArray) -> Quaternion:
         raise ValueError("Input rotation matrix must be 3x3.")
 
     # Allocate the Quaternion message
+    # print the rotation matrix
     q = Quaternion()
 
     # Extract the elements of the rotation matrix
@@ -52,5 +53,4 @@ def rotmat2q(T: NDArray) -> Quaternion:
         q.x = (m02 + m20) / s
         q.y = (m12 + m21) / s
         q.z = 0.25 * s
-
     return q

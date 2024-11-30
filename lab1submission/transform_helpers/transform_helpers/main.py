@@ -30,7 +30,7 @@ DH_PARAMS = np.array([a_list, d_list, alpha_list, theta_list]).T
 BASE_FRAME = "base"
 FRAMES = ["fr3_link0", "fr3_link1", "fr3_link2", "fr3_link3", "fr3_link4", "fr3_link5", "fr3_link6", "fr3_link7", "fr3_link8"]
 
-def get_transform_n_to_n_minus_one(n: int, theta: float) -> NDArray:
+def get_transform_n_to_n_plus_one(n: int, theta: float) -> NDArray:
     """
     Calculate the transform from frame n to frame n-1 using modified DH parameters.
 
@@ -47,12 +47,16 @@ def get_transform_n_to_n_minus_one(n: int, theta: float) -> NDArray:
     alpha = DH_PARAMS[n, 2]   # Twist angle
     theta += DH_PARAMS[n, 3]  # Joint angle (includes theta offset in modified DH parameters)
 
+    a_prev = DH_PARAMS[n - 1, 0]  # Link length
+    d_prev = DH_PARAMS[n - 1, 1]  # Link offset
+    alpha_prev = DH_PARAMS[n - 1, 2]  # Twist angle
+    theta_prev = DH_PARAMS[n - 1, 3]  # Joint angle (includes theta offset in modified DH parameters)
     # Compute the transformation matrix using the modified DH convention
     transform_matrix = np.array([
-        [np.cos(theta), -np.sin(theta) * np.cos(alpha),  np.sin(theta) * np.sin(alpha), a * np.cos(theta)],
-        [np.sin(theta),  np.cos(theta) * np.cos(alpha), -np.cos(theta) * np.sin(alpha), a * np.sin(theta)],
-        [0,              np.sin(alpha),                 np.cos(alpha),                d],
-        [0,              0,                             0,                            1]
+        [np.cos(theta), -np.sin(theta), 0, a_prev],
+        [np.sin(theta) * np.cos(alpha_prev), np.cos(theta) * np.cos(alpha_prev), -np.sin(alpha_prev), -d * np.sin(alpha_prev)],
+        [np.sin(theta) * np.sin(alpha_prev), np.cos(theta) * np.sin(alpha_prev), np.cos(alpha_prev), d * np.cos(alpha_prev)],
+        [0, 0, 0, 1]
     ])
 
     return transform_matrix
@@ -81,28 +85,38 @@ class ForwardKinematicCalculator(Node):
 
     def publish_transforms(self, msg: JointState):
         """
-        Publish transforms for all robot links using joint states.
+        Publish transforms for all robot links using Modified DH parameters.
         """
         self.get_logger().debug(str(msg))
 
-        # Loop through all frames and compute transforms
-        for i in range(len(FRAMES) - 1, -1, -1):
-            frame_id = self.prefix + FRAMES[i]
-            if i != 0:
-                parent_id = self.prefix + FRAMES[i - 1]
-            else:
+        # Loop through all frames from base to end-effector
+        for i in range(len(FRAMES)):
+
+            if i == 0:
+                # The base frame has no parent
                 parent_id = self.prefix + BASE_FRAME
+                frame_id = self.prefix + FRAMES[i]
+            else:
+                parent_id = self.prefix + FRAMES[i-1]
+                frame_id = self.prefix + FRAMES[i]
+            # if i == 0:
+            #     # The base frame has no parent
+            #     parent_id = BASE_FRAME
+            # else:
+            #     # Parent link of fr3_link1 is fr3_link0, and so on
+            #     parent_id = self.prefix + FRAMES[i - 1]
+            # if i != len(FRAMES) - 1:
+            #     # Parent link of fr3_link1 is fr3_link0, and so on
+            #     parent_id = self.prefix + FRAMES[i]
+            # else:
+            #     # Parent of the last link is the previous link
+            #     parent_id = self.prefix + FRAMES[i - 1]
 
             # Determine the joint angle (theta) for the current link
-            if i != len(FRAMES) - 1 and i != 0:
-                # Joint angles from the joint state message
-                theta = msg.position[i - 1]
-            elif i == len(FRAMES) - 1:
-                # Flange joint with static transform
-                theta = 0
+            if i < len(FRAMES) - 1 and i != 0:
+                theta = msg.position[i]
             else:
-                # Base frame with no rotation
-                theta = 0
+                theta = 0  # Static link
 
             # Create a TransformStamped message
             t = TransformStamped()
@@ -110,11 +124,11 @@ class ForwardKinematicCalculator(Node):
             t.header.frame_id = parent_id
             t.child_frame_id = frame_id
 
-            # Compute the transform matrix
-            if i != 0:
-                transform = get_transform_n_to_n_minus_one(i, theta)
+            if i == 0:
+                transform = np.eye(4)
             else:
-                transform = np.eye(4)  # Identity for the base frame
+                # Compute the Modified DH transform matrix
+                transform = get_transform_n_to_n_plus_one(i, theta)
 
             # Extract translation and rotation
             translation = transform[:3, 3]
@@ -126,10 +140,10 @@ class ForwardKinematicCalculator(Node):
             t.transform.translation.y = translation[1]
             t.transform.translation.z = translation[2]
 
-            t.transform.rotation.x = quat[0]
-            t.transform.rotation.y = quat[1]
-            t.transform.rotation.z = quat[2]
-            t.transform.rotation.w = quat[3]
+            t.transform.rotation.x = quat.x
+            t.transform.rotation.y = quat.y
+            t.transform.rotation.z = quat.z
+            t.transform.rotation.w = quat.w
 
             # Publish the transform
             self.tf_broadcaster.sendTransform(t)

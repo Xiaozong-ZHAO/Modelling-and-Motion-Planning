@@ -1,0 +1,24 @@
+digraph G {
+"base" -> "fr3_link0"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"fr3_link7" -> "fr3_link8"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"fr3_link6" -> "fr3_link7"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link0" -> "fr3_link1"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link1" -> "fr3_link2"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link2" -> "fr3_link3"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link3" -> "fr3_link4"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link4" -> "fr3_link5"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"fr3_link5" -> "fr3_link6"[label=" Broadcaster: default_authority\nAverage rate: 10.222\nBuffer length: 4.5\nMost recent transform: 1732889783.059385\nOldest transform: 1732889778.559401\n"];
+"my_robot/fr3_link7" -> "my_robot/fr3_link8"[label=" Broadcaster: default_authority\nAverage rate: 10.223\nBuffer length: 4.5\nMost recent transform: 1732889783.060479\nOldest transform: 1732889778.560869\n"];
+"my_robot/fr3_link6" -> "my_robot/fr3_link7"[label=" Broadcaster: default_authority\nAverage rate: 10.228\nBuffer length: 4.4\nMost recent transform: 1732889782.960851\nOldest transform: 1732889778.561182\n"];
+"my_robot/fr3_link5" -> "my_robot/fr3_link6"[label=" Broadcaster: default_authority\nAverage rate: 10.228\nBuffer length: 4.4\nMost recent transform: 1732889782.961226\nOldest transform: 1732889778.561453\n"];
+"my_robot/fr3_link4" -> "my_robot/fr3_link5"[label=" Broadcaster: default_authority\nAverage rate: 10.228\nBuffer length: 4.4\nMost recent transform: 1732889782.96155\nOldest transform: 1732889778.561741\n"];
+"my_robot/fr3_link3" -> "my_robot/fr3_link4"[label=" Broadcaster: default_authority\nAverage rate: 10.228\nBuffer length: 4.4\nMost recent transform: 1732889782.961865\nOldest transform: 1732889778.561994\n"];
+"my_robot/fr3_link2" -> "my_robot/fr3_link3"[label=" Broadcaster: default_authority\nAverage rate: 10.227\nBuffer length: 4.4\nMost recent transform: 1732889782.962208\nOldest transform: 1732889778.562266\n"];
+"my_robot/fr3_link1" -> "my_robot/fr3_link2"[label=" Broadcaster: default_authority\nAverage rate: 10.227\nBuffer length: 4.4\nMost recent transform: 1732889782.962518\nOldest transform: 1732889778.562526\n"];
+"my_robot/fr3_link0" -> "my_robot/fr3_link1"[label=" Broadcaster: default_authority\nAverage rate: 10.227\nBuffer length: 4.4\nMost recent transform: 1732889782.962844\nOldest transform: 1732889778.562802\n"];
+"my_robot/base" -> "my_robot/fr3_link0"[label=" Broadcaster: default_authority\nAverage rate: 10.227\nBuffer length: 4.4\nMost recent transform: 1732889782.963058\nOldest transform: 1732889778.563064\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1732889783.08019"[ shape=plaintext ] ;
+}->"my_robot/base";
+}
