@@ -88,7 +88,31 @@ class YoubotKinematicBase(Node):
             up_to_joint (int, optional): Specify up to what frame you want to compute forward kinematics.
                 Defaults to 5.
         """
-        raise NotImplementedError
+        # validate input
+        if up_to_joint < 1 or up_to_joint > len(joint_readings):
+            raise ValueError("up_to_joint must be between or no more than the number of joints")
+        if len(joint_readings) < up_to_joint:
+            raise ValueError("joint number insufficient")
+        
+        # Get the DH parameter from the object
+        dh_params = self.dh_params
+
+        # We assume the initial base position is identity matrix
+        T = np.eye(4)
+
+        for i in range(up_to_joint):
+            a = dh_params['a'][i]
+            alpha = dh_params['alpha'][i]
+            d = dh_params['d'][i]
+            theta = dh_params['theta'][i] + joint_readings[i]
+
+            A = self.standard_dh(a, alpha, d, theta)
+            # Update the base position and orientation
+            T = T.dot(A)
+
+        # convert the transformation matrix to rorigues vector
+        p = self.rotmat2rodrigues(T)
+        return p
 
     def get_jacobian(self, joint):
         """Compute Jacobian given the robot joint values. Implementation found in child classes.
@@ -117,10 +141,35 @@ class YoubotKinematicBase(Node):
         assert isinstance(alpha, (int, float)), "wrong input type for =alpha"
         assert isinstance(d, (int, float)), "wrong input type for d"
         assert isinstance(theta, (int, float)), "wrong input type for theta"
+        # Initialize the transformation matrix
         A = np.zeros((4, 4))
-
         # TODO: implement a method to get the transform matrix using DH Parameters
-        raise NotImplementedError
+
+        # The first row
+        A[0, 0] = np.cos(theta)
+        A[0, 1] = -np.sin(theta) * np.cos(alpha)
+        A[0, 2] = np.sin(theta) * np.sin(alpha)
+        A[0, 3] = a * np.cos(theta)
+
+        # The second row
+        A[1, 0] = np.sin(theta)
+        A[1, 1] = np.cos(theta) * np.cos(alpha)
+        A[1, 2] = -np.cos(theta) * np.sin(alpha)
+        A[1, 3] = a * np.sin(theta)
+
+        # The third row
+        A[2, 0] = 0
+        A[2, 1] = np.sin(alpha)
+        A[2, 2] = np.cos(alpha)
+        A[2, 3] = d
+
+        # The fourth row
+        A[3, 0] = 0
+        A[3, 1] = 0
+        A[3, 2] = 0
+        A[3, 3] = 1
+
+        # Ensure the output is of the right type and shape
         assert isinstance(A, np.ndarray), "Output wasn't of type ndarray"
         assert A.shape == (4, 4), "Output had wrong dimensions"
         return A
@@ -140,5 +189,26 @@ class YoubotKinematicBase(Node):
         # TODO: Implement a method to convert from a rotation matrix to a rodrigues vector
 
         p = np.empty(6, float)
-        raise NotImplementedError
+
+        # extract rotation and translation components
+        rotation = T[:3, :3]
+        translation = T[:3, 3]
+
+        # Convert the rotation matrix to quaternion
+        q = rotmat2q(rotation)
+
+        # separate the quaternion to scalar and vector
+        q_w = q.w
+        q_vec = np.array([q.x, q.y, q.z])
+
+        if np.isclose(q_w, 1.0):
+            # if the scalar part is 1, the rotation is 0
+            p[3:] = np.zeros(3)
+        else:
+            # convert the quaternion to rodirgues vector
+            angle = 2 * np.arccos(q_w)
+            axis = q_vec / np.linalg.norm(q_vec)
+            p[3:] = angle * axis
+        
+        p[:3] = translation
         return p
