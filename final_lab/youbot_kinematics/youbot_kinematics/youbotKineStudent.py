@@ -59,7 +59,7 @@ class YoubotKinematicStudent(YoubotKinematicBase):
         assert T.shape == (4, 4), "Output had wrong dimensions"
         return T
 
-    def get_jacobian(self, joint):
+    def get_jacobian(self, joints_readings):
         """Given the joint values of the robot, compute the Jacobian matrix.
 
         Args:
@@ -68,37 +68,79 @@ class YoubotKinematicStudent(YoubotKinematicBase):
         Returns:
             Jacobian (numpy.ndarray): NumPy matrix of size 6x5 which is the Jacobian matrix.
         """
-        assert isinstance(joint, list)
-        assert len(joint) == 5
+        joint_num = 6
+        # add polarity and offset to the theta DH component
+        joints_readings = [sign * angle for sign, angle in zip(self.youbot_joint_readings_polarity, joints_readings)]
+        # create a container to store the 5 transformation matrices T01 to T45
+        T_all = np.zeros((4, 4, joint_num))
+        # get the transformation matrix T01 to T45
+        for i in range(joint_num):
+            if i == 0:
+                T_all[:, :, i] = np.identity(4)
+                # convert z0 to [0 0 -1]
+                T_all[:3, 2, i] = [0, 0, 1]
+                continue
+            T = self.standard_dh(self.dh_params['a'][i-1],
+                                 self.dh_params['alpha'][i-1],
+                                 self.dh_params['d'][i-1],
+                                 self.dh_params['theta'][i-1] + joints_readings[i-1])
+            # store the transformation to the variable T_all
+            T_all[:, :, i] = T
+        # calculate the transformation matrices frmo T02 to T04
+        for i in range(1, joint_num):
+            T_all[:, :, i] = T_all[:, :, i - 1].dot(T_all[:, :, i])
+
+        # create a container to store the position of corresponding matrices in T_all
+        p_all = np.zeros((3, joint_num))
+        # get the position of the transformation matrices
+        for i in range(joint_num):
+            p_all[:, i] = T_all[:3, 3, i]
+
+        # create a container to store the z axis of the transformation matrices
+        z_all = np.zeros((3, joint_num))
+        # get the z axis of the transformation matrices
+        for i in range(joint_num):
+            z_all[:, i] = T_all[:3, 2, i]
+        # calculate the 6x5 Jacobian matrix
+        jacobian = np.zeros((6, joint_num))
+        for i in range(joint_num):
+            if i == 0:
+                jacobian[:3, i] = np.cross(-z_all[:, i], p_all[:, joint_num-1] - p_all[:, i])
+                jacobian[3:, i] = -z_all[:, i]
+            else:
+                jacobian[:3, i] = np.cross(z_all[:, i], p_all[:, joint_num-1] - p_all[:, i])
+                jacobian[3:, i] = z_all[:, i]
+        jacobian = jacobian[:, :5]
+        # assert isinstance(joint, list)
+        # assert len(joint) == 5
 
         # TODO: create the jacobian matrix
-
         # Your code starts here ----------------------------
-
-        # For your solution to match the KDL Jacobian, z0 needs to be set [0, 0, -1] instead of [0, 0, 1], since that is how its defined in the URDF.
-        # Both are correct.
-        # Your code starts here ----------------------------
-        raise NotImplementedError
         # Your code ends here ------------------------------
-        assert jacobian.shape == (6, 5)
+        # assert jacobian.shape == (6, 5)
         return jacobian
 
-    def check_singularity(self, joint):
+
+    def check_singularity(self, jacobian):
         """Check for singularity condition given robot joints. Coursework 2 Question 4c.
         Reference Lecture 5 slide 30.
 
         Args:
-            joint (list): the state of the robot joints. In a youbot those are revolute
+            jacobian (numpy.ndarray): Jacobian matrix of size 6x5.
 
         Returns:
             singularity (bool): True if in singularity and False if not in singularity.
 
         """
-        assert isinstance(joint, list)
-        assert len(joint) == 5
+        assert isinstance(jacobian, np.ndarray)
+        assert jacobian.shape == (6, 5), "Jacobian matrix has to be a 6x5 matrix"
+
         # TODO: Implement this
         # Your code starts here ----------------------------
-        raise NotImplementedError
+        # Calculate the rank of the Jacobian matrix
+        rank = np.linalg.matrix_rank(jacobian)
+        # Define singularity condition
+        singularity = bool(rank < min(jacobian.shape))
         # Your code ends here ------------------------------
         assert isinstance(singularity, bool)
         return singularity
@@ -116,12 +158,15 @@ def main(args=None):
         # we would probably compute the jacobian at our current joint angles, not the target
         # but this is just to check your work
         jacobian = kinematic_student.get_jacobian(target_joint_angles)
+        singularity = kinematic_student.check_singularity(jacobian)
         print("target joint angles")
         print(target_joint_angles)
         print("pose")
         print(pose)
         print("jacobian")
         print(jacobian)
+        print("singularity")
+        print(singularity)
 
     rclpy.spin(kinematic_student)
 
